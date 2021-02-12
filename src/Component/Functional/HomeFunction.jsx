@@ -1,10 +1,17 @@
 import React from 'react';
-import Blog from './Blog';
+// import Blog from './Blog';
+import Product from '../Class/Product';
+
 
 const HomeFunction = () => {
     return (
         <div>
-            <Blog
+            <Product
+                product_name="MacBook Pro 2017"
+                price="17000000"
+                stock="10"
+            />
+            {/* <Blog
                 tanggal="12 Februari 2020"
                 judul="Teknologi Blockchain"
                 summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id eleifend velit, quis dapibus eros. Aliquam vel hendrerit lacus, ac egestas nibh."
@@ -18,7 +25,7 @@ const HomeFunction = () => {
                 tanggal="10 Februari 2020"
                 judul="Create Standard Rest + Node JS Back End"
                 summary=" sed interdum velit tellus at urna. Duis viverra enim eget diam placerat, non facilisis tellus faucibus. Pellentesque eget finibus sem."
-            />
+            /> */}
         </div>
     );
 }

@@ -1,0 +1,23 @@
+.box-stock {
+    width: 300px;
+    display: inline-block;
+    height: auto;
+    border: 1px solid gray;
+    border-radius: 0.5em;
+    padding: 10px;
+    margin: 10px;
+}
+
+.box-stock img {
+    border-radius: 0.5em;
+    width: 300px;
+    height: auto;
+}
+
+.btn-click {
+    border-radius: 0.5em;
+    background-color: black;
+    color: white;
+    padding: 1em 2em;
+    border: none;
+}
