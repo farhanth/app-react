@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Blog from './Component/Functional/Blog';
+import HomeFunction from './Component/Functional/HomeFunction';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <HomeFunction/>
   </React.StrictMode>,
   document.getElementById('root')
 );

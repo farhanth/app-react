@@ -1,0 +1,15 @@
+.blog-wrap {
+    width: 300px;
+    display: inline-block;
+    height: auto;
+    border: 1px solid gray;
+    border-radius: 0.5em;
+    padding: 10px;
+    margin: 10px;
+}
+
+.blog-wrap img {
+    border-radius: 0.5em;
+    width: 300px;
+    height: auto;
+}
