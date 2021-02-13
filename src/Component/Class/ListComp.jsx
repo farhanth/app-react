@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import axios from 'axios';
 import qs from 'querystring';
 import { Table, Button, Container, NavLink, Alert } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const url = 'http://localhost:3001/';
 
@@ -28,7 +29,9 @@ class ListComp extends PureComponent {
         return (
             <Container>
                 <h2 className="my-3">Data Mahasiswa</h2>
-                <Button color="success mb-3">Tambah Data</Button>
+                <Link to="/create">
+                    <Button color="success mb-3">Tambah Data</Button>
+                </Link>
                 <Table className="table-bordered">
                     <thead>
                         <tr>

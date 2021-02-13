@@ -5,6 +5,7 @@ import HomePage from './Component/Functional/HomePage';
 import AboutComp from './Component/Functional/AboutComp';
 import DetailComp from './Component/Functional/DetailComp';
 import ListComp from './Component/Class/ListComp';
+import AddMahasiswa from './Component/Class/AddMahasiswa';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route exact path="/about" component={AboutComp}/>
           <Route exact path="/detail/:id" component={DetailComp}/>
           <Route exact path="/mahasiswa" component={ListComp}/>
+          <Route exact path="/create" component={AddMahasiswa}/>
         </Switch>
       </BrowserRouter>
     </div>
