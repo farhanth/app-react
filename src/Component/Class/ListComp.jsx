@@ -25,6 +25,29 @@ class ListComp extends PureComponent {
         });
     }
 
+    deleteMahasiswa = (idmhs) => {
+        const { mahasiswa } = this.state;
+        const data = qs.stringify({
+            id_mahasiswa: idmhs
+        });
+
+        axios.delete(url + `delete/${idmhs}`).then(json => {
+            if (json.data.status === 200) {
+                this.setState({
+                    response: json.data.values,
+                    mahasiswa: mahasiswa.filter(mahasiswa => mahasiswa.id_mahasiswa !== idmhs),
+                    display: 'block'
+                });
+                this.props.history.push('/mahasiswa');
+            } else {
+                this.setState({
+                    response: json.data.values,
+                    display: 'block'
+                });
+            }
+        });
+    }
+
     render() {
         return (
             <Container>
@@ -32,22 +55,25 @@ class ListComp extends PureComponent {
                 <Link to="/create">
                     <Button color="success mb-3">Tambah Data</Button>
                 </Link>
+                <Alert color="success" style={{ display: this.state.display }}>
+                    {this.state.response}
+                </Alert>
                 <Table className="table-bordered">
                     <thead>
                         <tr>
-                            <th>NPM</th>
-                            <th>Nama</th>
-                            <th>Jurusan</th>
-                            <th>Aksi</th>
+                            <th className="text-center">NPM</th>
+                            <th className="text-center">Nama</th>
+                            <th className="text-center">Jurusan</th>
+                            <th className="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.mahasiswa.map(mahasiswa =>
                             <tr key={mahasiswa.id_mahasiswa}>
-                                <td>{mahasiswa.npm}</td>
-                                <td>{mahasiswa.nama}</td>
-                                <td>{mahasiswa.jurusan}</td>
-                                <td>
+                                <td className="align-middle text-center">{mahasiswa.npm}</td>
+                                <td className="align-middle">{mahasiswa.nama}</td>
+                                <td className="align-middle">{mahasiswa.jurusan}</td>
+                                <td className="align-middle text-center">
                                     <Link to={
                                         {
                                             pathname: `/edit/${mahasiswa.id_mahasiswa}`,
@@ -58,15 +84,17 @@ class ListComp extends PureComponent {
                                             }
                                         }
                                     }>
-                                        <Button color="primary">Edit</Button>
+                                        <Button color="primary" className="m-1">Edit</Button>
                                     </Link>
-                                    <Link to={
-                                        {
-                                            pathname: `/delete/${mahasiswa.id_mahasiswa}`
+                                    <Button color="danger" className="m-1"
+                                        onClick={e =>
+                                            window.confirm("Are you sure you wish to delete this item?") &&
+                                            this.deleteMahasiswa(mahasiswa.id_mahasiswa)
                                         }
-                                    }>
-                                        <Button color="danger">Delete</Button>
-                                    </Link>
+                                    >
+                                        Delete
+                                    </Button>
+                                    {/* <Button color="danger" className="m-1" onClick={() => this.deleteMahasiswa(mahasiswa.id_mahasiswa)}>Delete</Button> */}
                                 </td>
                             </tr>
                         )}
