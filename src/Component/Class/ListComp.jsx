@@ -47,12 +47,32 @@ class ListComp extends PureComponent {
                                 <td>{mahasiswa.npm}</td>
                                 <td>{mahasiswa.nama}</td>
                                 <td>{mahasiswa.jurusan}</td>
-                                <td>Edit   |   Hapus</td>
+                                <td>
+                                    <Link to={
+                                        {
+                                            pathname: `/edit/${mahasiswa.id_mahasiswa}`,
+                                            state: {
+                                                npm: mahasiswa.npm,
+                                                nama: mahasiswa.nama,
+                                                jurusan: mahasiswa.jurusan,
+                                            }
+                                        }
+                                    }>
+                                        <Button color="primary">Edit</Button>
+                                    </Link>
+                                    <Link to={
+                                        {
+                                            pathname: `/delete/${mahasiswa.id_mahasiswa}`
+                                        }
+                                    }>
+                                        <Button color="danger">Delete</Button>
+                                    </Link>
+                                </td>
                             </tr>
                         )}
                     </tbody>
                 </Table>
-            </Container>
+            </Container >
         );
     };
 }

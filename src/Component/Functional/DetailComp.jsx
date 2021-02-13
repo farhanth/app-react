@@ -2,6 +2,7 @@ import React from 'react';
 import { Jumbotron, Button } from 'reactstrap';
 
 const DetailComp = (props) => {
+    // const { id } = props.match.params;
     return (
         <div>
             <Jumbotron>

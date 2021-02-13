@@ -1,21 +1,30 @@
 import React, { PureComponent } from 'react';
 import axios from 'axios';
+import qs from 'querystring';
 import { Container, Col, Row, Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { Link } from 'react-router-dom';
 
 const url = 'http://localhost:3001/';
 
-class AddMahasiswa extends PureComponent {
+class EditMahasiswa extends PureComponent {
     constructor(props) {
         super(props)
 
         this.state = {
-            npm: '',
-            nama: '',
-            jurusan: '',
-            response: '',
+            id_mahasiswa: '',
+            npm: this.props.location.state.npm,
+            nama: this.props.location.state.nama,
+            jurusan: this.props.location.state.jurusan,
+            reponse: '',
             display: 'none'
         }
+    }
+
+    componentDidMount() {
+        const { match: { params } } = this.props;
+
+        this.setState({
+            id_mahasiswa: params.id
+        });
     }
 
     handleChange = (e) => {
@@ -24,24 +33,28 @@ class AddMahasiswa extends PureComponent {
         })
     }
 
-    addMahasiswa = () => {
-        axios.post(url + 'create', {
+    editMahasiswaFunc = (idmhs) => {
+        const data = qs.stringify({
+            id: idmhs,
             npm: this.state.npm,
             nama: this.state.nama,
             jurusan: this.state.jurusan
-        }).then(json => {
-            if (json.data.status === 200) {
-                this.setState({
-                    response: json.data.values,
-                    display: 'block'
-                });
-            } else {
-                this.setState({
-                    response: json.data.values,
-                    display: 'block'
-                });
-            }
         });
+
+        axios.put(url + `update/${idmhs}`, data)
+            .then(json => {
+                if (json.data.status === 200) {
+                    this.setState({
+                        response: json.data.values,
+                        display: 'block'
+                    });
+                } else {
+                    this.setState({
+                        response: json.data.values,
+                        display: 'block'
+                    });
+                }
+            });
     }
 
     render() {
@@ -64,11 +77,11 @@ class AddMahasiswa extends PureComponent {
                         <Label for="jurusan">Jurusan</Label>
                         <Input type="text" name="jurusan" id="jurusan" value={this.state.jurusan} onChange={this.handleChange} maxLength="64" placeholder="Input Jurusan" />
                     </FormGroup>
-                    <Button type="button" onClick={this.addMahasiswa}>Submit</Button>
+                    <Button type="button" onClick={() => this.editMahasiswaFunc(this.state.id_mahasiswa)}>Update</Button>
                 </Form>
             </Container>
         );
     };
 }
 
-export default AddMahasiswa;
+export default EditMahasiswa;
